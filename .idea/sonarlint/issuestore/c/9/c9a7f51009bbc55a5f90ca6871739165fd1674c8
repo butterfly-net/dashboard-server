@@ -1,0 +1,7 @@
+
+ò
+java:S1598"ÏThis file "Config.java" should be located in "it/unibz/butterfly_net/template/core/utils" directory, not in "/Users/joaodaniel/workspace/butterfly-net/template/src/main/java/it/unibz/butterfly_net/template".(­ßÉ¼şÿÿÿÿ8¨ƒ¹Åê1
+
+java:S2095"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(ßºÛ­8İØ¸Åê1J$2adcf980-7614-4186-9b93-ab7f847bd34f
+Ü
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(Óùÿ¿8âØ¸Åê1J$14601cdb-1ca9-4a77-9e1b-4058bc319679

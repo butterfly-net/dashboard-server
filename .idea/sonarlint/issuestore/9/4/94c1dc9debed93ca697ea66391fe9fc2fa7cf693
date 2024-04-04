@@ -1,0 +1,7 @@
+
+	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ªÍ”©ê1J$ecc76c33-2b31-4ea0-b93f-c18b2a37cebd
+	java:S1125"FDefine and throw a dedicated exception instead of using a generic one.(¨İÃÍùÿÿÿÿ8ªÍ”©ê1J$430def64-cbc5-4cbd-ae7e-6f3ff5c0ba2c
+g
+java:S2629 "$Invoke method(s) only conditionally.(Œı¸Š8«Í”©ê1J$f0273b4a-f5c6-493c-9f0a-94926749b865
+ 
+java:S21393"XEither log this exception and handle it, or rethrow it with some contextual information.(æÜ×Şøÿÿÿÿ8¸Í”©ê1J$679f13d4-8245-4fef-8606-bcabf3a2ffbd

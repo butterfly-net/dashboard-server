@@ -1,0 +1,5 @@
+
+
+java:S2095"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(ßºÛ­8ƒ³Èœê1J$68b7668f-27d6-48c1-a50d-44abc54b7565
+Ü
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(Óùÿ¿8…³Èœê1J$9e094f4b-a81f-4848-a16a-80c4f950a81b
