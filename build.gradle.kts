@@ -17,7 +17,7 @@ version = "1.0-SNAPSHOT"
 tasks.withType<ShadowJar> {
     archiveFileName = "${project.name}_${project.version}_shadow.jar"
     manifest {
-        attributes["Main-Class"] = "${project.group}.template.Component"
+        attributes["Main-Class"] = "${project.group}.dashboard_server.Component"
     }
 }
 

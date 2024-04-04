@@ -1,7 +1,7 @@
-package it.unibz.butterfly_net.template.application;
+package it.unibz.butterfly_net.dashboard_server.application;
 
 import com.zaxxer.hikari.HikariDataSource;
-import it.unibz.butterfly_net.template.core.utils.Config;
+import it.unibz.butterfly_net.dashboard_server.core.utils.Config;
 
 import java.io.IOException;
 import java.sql.Connection;
