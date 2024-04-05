@@ -3,9 +3,8 @@ package it.unibz.butterfly_net.dashboard_server;
 import it.unibz.butterfly_net.dashboard_server.application.DatabaseConnection;
 import it.unibz.butterfly_net.dashboard_server.application.InsertionListener;
 import it.unibz.butterfly_net.dashboard_server.application.PostgresqlRawDataRepository;
+import it.unibz.butterfly_net.dashboard_server.application.PostgresqlSeleniumRecordRepository;
 import it.unibz.butterfly_net.dashboard_server.core.RawDataProcessor;
-import it.unibz.butterfly_net.dashboard_server.core.model.SeleniumRecord;
-import it.unibz.butterfly_net.dashboard_server.core.repositories.SeleniumRecordRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,18 +19,7 @@ public class Component {
 
         RawDataProcessor processor = new RawDataProcessor(
                 new PostgresqlRawDataRepository(),
-                new SeleniumRecordRepository() {
-                    @Override
-                    public SeleniumRecord create(Long projectId, Long timestamp, String pagePath, String issues) {
-                        logger.info(String.format("mock inserting: %d, %d, %s, %s", projectId, timestamp, pagePath, issues));
-                        return null;
-                    }
-
-                    @Override
-                    public SeleniumRecord findByProjectId(Long projectId) {
-                        return null;
-                    }
-                }
+                new PostgresqlSeleniumRecordRepository()
         );
 
         Connection connection = DatabaseConnection.getConnection();

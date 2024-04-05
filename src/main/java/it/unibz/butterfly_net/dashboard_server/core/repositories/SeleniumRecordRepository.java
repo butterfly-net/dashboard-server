@@ -2,7 +2,9 @@ package it.unibz.butterfly_net.dashboard_server.core.repositories;
 
 import it.unibz.butterfly_net.dashboard_server.core.model.SeleniumRecord;
 
+import java.sql.SQLException;
+
 public interface SeleniumRecordRepository {
-    SeleniumRecord create(Long projectId, Long timestamp, String pagePath, String issues);
+    SeleniumRecord create(Long projectId, Long timestamp, String pagePath, String issues) throws SQLException;
     SeleniumRecord findByProjectId(Long projectId);
 }

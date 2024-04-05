@@ -11,6 +11,8 @@ import it.unibz.butterfly_net.dashboard_server.core.repositories.SeleniumRecordR
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.SQLException;
+
 public class RawDataProcessor {
     private final Logger logger = LoggerFactory.getLogger(RawDataProcessor.class);
     private final RawDataRepository rawDataRepository;
@@ -21,7 +23,7 @@ public class RawDataProcessor {
         this.seleniumRecordRepository = seleniumRecordRepository;
     }
 
-    public void run(String name, String parameter) throws JsonProcessingException {
+    public void run(String name, String parameter) throws JsonProcessingException, SQLException {
         String message = String.format("I have been called with: %s, %s", name, parameter);
         logger.info(message);
 
@@ -38,7 +40,7 @@ public class RawDataProcessor {
         }
     }
 
-    private void selenium(RawData lastRecord) throws JsonProcessingException {
+    private void selenium(RawData lastRecord) throws JsonProcessingException, SQLException {
         ObjectMapper mapper = new ObjectMapper();
         SeleniumPayload payload = mapper.readValue(lastRecord.content(), SeleniumPayload.class);
         seleniumRecordRepository.create(lastRecord.projectType().projectId(), lastRecord.timestamp(), payload.pagePath(), payload.issues());
