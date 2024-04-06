@@ -6,5 +6,5 @@ public record SeleniumRecord(
         Long timestamp,
         String pagePath,
         String issues
-) {
+) implements ProcessedData {
 }
