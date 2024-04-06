@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Set;
 
 public class PostgresqlSeleniumRecordRepository extends PostgresqlRepository implements SeleniumRecordRepository {
     @Override
@@ -62,7 +63,7 @@ public class PostgresqlSeleniumRecordRepository extends PostgresqlRepository imp
     }
 
     @Override
-    public SeleniumRecord findByProjectId(Long projectId) {
+    public Set<SeleniumRecord> findByProjectId(Long projectId) {
         return null;
     }
 }

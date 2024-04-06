@@ -9,6 +9,8 @@ import it.unibz.butterfly_net.dashboard_server.core.repositories.RawDataReposito
 import it.unibz.butterfly_net.dashboard_server.core.repositories.SeleniumRecordRepository;
 import org.junit.jupiter.api.Test;
 
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class RawDataProcessorTest {
@@ -78,7 +80,7 @@ class RawDataProcessorTest {
             }
 
             @Override
-            public SeleniumRecord findByProjectId(Long projectId) {
+            public Set<SeleniumRecord> findByProjectId(Long projectId) {
                 return null;
             }
         };
