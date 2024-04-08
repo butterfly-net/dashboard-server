@@ -11,24 +11,25 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class InsertionListener extends Thread {
-    private final Connection connection;
-    private final PGConnection pgConnection;
+public class InsertionListener implements Runnable {
     private final Logger logger = LoggerFactory.getLogger(InsertionListener.class);
     private final RawDataProcessor processor;
 
-    public InsertionListener(Connection connection, RawDataProcessor processor) throws SQLException {
+    public InsertionListener(RawDataProcessor processor) {
         this.processor = processor;
-        this.connection = connection;
-        this.pgConnection = this.connection.unwrap(PGConnection.class);
-
-        Statement statement = this.connection.createStatement();
-        statement.execute("LISTEN record_inserted");
-        statement.close();
     }
 
+    @Override
     public void run() {
+        logger.info("running...");
         try {
+            Connection connection = DatabaseConnection.getConnection();
+            PGConnection pgConnection = connection.unwrap(PGConnection.class);
+
+            Statement statement = connection.createStatement();
+            statement.execute("LISTEN record_inserted");
+            statement.close();
+
             while (true) {
                 PGNotification[] notifications = pgConnection.getNotifications();
 
