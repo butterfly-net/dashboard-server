@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashSet;
 import java.util.Set;
 
 public class PostgresqlSeleniumRecordRepository extends PostgresqlRepository implements SeleniumRecordRepository {
@@ -64,6 +65,29 @@ public class PostgresqlSeleniumRecordRepository extends PostgresqlRepository imp
 
     @Override
     public Set<SeleniumRecord> findByProjectId(Long projectId) {
-        return null;
+        String query = "SELECT * FROM SELENIUM_RECORDS " +
+                "WHERE project_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, projectId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Set<SeleniumRecord> seleniumRecords = new HashSet<>();
+
+            while (resultSet.next()) {
+                long id = resultSet.getLong("id");
+                long timestamp = resultSet.getLong("timestamp");
+                String pagePath = resultSet.getString("page_path");
+                String issues = resultSet.getString("issues");
+                seleniumRecords.add(new SeleniumRecord(
+                        id, projectId, timestamp,
+                        pagePath, issues
+                ));
+            }
+            return seleniumRecords;
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 }
