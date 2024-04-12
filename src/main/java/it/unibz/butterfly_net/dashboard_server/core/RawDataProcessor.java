@@ -12,11 +12,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public class RawDataProcessor {
     private final Logger logger = LoggerFactory.getLogger(RawDataProcessor.class);
     private final RawDataRepository rawDataRepository;
     private final SeleniumRecordRepository seleniumRecordRepository;
+
+    private record RequestContent(
+            SeleniumPayload body,
+            HashMap<String, Object> headers,
+            HashMap<String, Object> queryParams
+    ) {}
 
     public RawDataProcessor(RawDataRepository rawDataRepository, SeleniumRecordRepository seleniumRecordRepository) {
         this.rawDataRepository = rawDataRepository;
@@ -33,7 +40,7 @@ public class RawDataProcessor {
 
             default -> {
                 String unknownType = lastRecord.projectType().type();
-                String error = String.format("Unknown type %s", unknownType);
+                String error = String.format("Unknown type \"%s\"", unknownType);
                 logger.error(error);
                 throw new UnknownProjectTypeError(unknownType);
             }
@@ -42,7 +49,8 @@ public class RawDataProcessor {
 
     private void selenium(RawData lastRecord) throws JsonProcessingException, SQLException {
         ObjectMapper mapper = new ObjectMapper();
-        SeleniumPayload payload = mapper.readValue(lastRecord.content(), SeleniumPayload.class);
+        RequestContent request = mapper.readValue(lastRecord.content(), RequestContent.class);
+        SeleniumPayload payload = request.body();
         seleniumRecordRepository.create(lastRecord.projectType().projectId(), lastRecord.timestamp(), payload.pagePath(), payload.issues());
     }
 }

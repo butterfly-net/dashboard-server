@@ -23,7 +23,7 @@ class RawDataProcessorTest {
         Long ts = 12341L;
         String path = "/home";
         String issues = "foo bar baz";
-        String mockContent = String.format("{\"pagePath\":\"%s\",\"issues\":\"%s\"}", path, issues);
+        String mockContent = mockContent(path, issues);
         RawData mockData = new RawData(new ProjectType(pid, ProjectType.SELENIUM), ts, mockContent);
         ObservableSeleniumRecordRepository seleniumRepo = observableSeleniumRepo();
         underTest = new RawDataProcessor(
@@ -56,6 +56,15 @@ class RawDataProcessorTest {
                 UnknownProjectTypeError.class,
                 () -> underTest.run("test", "test")
         );
+    }
+
+    private String mockContent(String page, String issues) {
+        String template = "{" +
+                "\"queryParams\":{}," +
+                "\"body\":{\"pagePath\":\"%s\",\"issues\":\"%s\"}," +
+                "\"headers\":{\"Authentication-Key\":\"abcd-1234\",\"Connection\":\"Upgrade, HTTP2-Settings\",\"User-Agent\":\"Java-http-client/17.0.9\",\"Host\":\"localhost:8884\",\"Project-Id\":\"1\",\"HTTP2-Settings\":\"AAEAAEAAAAIAAAABAAMAAABkAAQBAAAAAAUAAEAA\",\"Content-Length\":\"42\",\"Upgrade\":\"h2c\"}" +
+                "}";
+        return String.format(template, page, issues);
     }
 
     private SeleniumRecordRepository mockSeleniumRepo() {
